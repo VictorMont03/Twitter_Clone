@@ -59,7 +59,25 @@
             return $valido;
         }
 
+        public function autenticar(){
+            $query = 'select id, nome, email from usuarios where senha = :senha and email = :email';
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue('email', $this->__get('email'));
+            $stmt->bindValue('senha', $this->__get('senha'));
 
+            $stmt->execute();
+
+            $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            //print_r($retorno);
+
+            if($retorno[0]['id'] != '' && $retorno[0]['nome'] != ''){
+                $this->__set('nome', $retorno[0]['nome']);
+                $this->__set('id', $retorno[0]['id']);
+                return $this;
+            }else{
+                return;
+            }
+        }
 
     }
 ?>
