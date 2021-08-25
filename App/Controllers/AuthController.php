@@ -8,7 +8,7 @@
         public function autenticar(){
             $user = Container::getModels('User');
             $user->__set('email', $_POST['email']);
-            $user->__set('senha', $_POST['senha']);
+            $user->__set('senha', md5($_POST['senha']));
 
            $user->autenticar();
         

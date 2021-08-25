@@ -27,7 +27,7 @@
             $user = Container::getModels('User');
             $user->__set('nome', $_POST['nome']);
             $user->__set('email', $_POST['email']);
-            $user->__set('senha', $_POST['senha']);
+            $user->__set('senha', md5($_POST['senha']));
             
             //print_r($user);
 
